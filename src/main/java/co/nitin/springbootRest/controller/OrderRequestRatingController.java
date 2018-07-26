@@ -27,7 +27,6 @@ import co.nitin.springbootRest.service.ProductsService;
  * Every {@link OrderRequest} consist of one {@link OrderRatings} per product in that order.
  * </br>
  * Every order can be provided a rating by the user and this controller handles actions to be carried out on them.
- * 
  * @author Nitin Sharma
  *
  */
