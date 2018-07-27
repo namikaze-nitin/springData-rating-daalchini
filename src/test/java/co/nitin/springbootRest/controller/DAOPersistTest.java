@@ -103,7 +103,7 @@ public class DAOPersistTest {
 
 		orderRatingsdao.save(list);
 
-		Assert.assertNotNull( productdao.findOne(prod.getVariant_id()) );
+		Assert.assertNotNull( productdao.findOne( prod.getVariant_id()) );
 		Assert.assertEquals( orderRatingsdao.findOne("aaaa").getRating_food() , 1);
 	}
 }
