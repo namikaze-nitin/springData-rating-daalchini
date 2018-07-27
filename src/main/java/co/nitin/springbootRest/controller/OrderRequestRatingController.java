@@ -70,6 +70,10 @@ public class OrderRequestRatingController {
 	private static String ERROR_STATUS = "ERROR";
 	private static String ERROR_STATUS_CODE = "ER_0001";
 	private static String ERROR_STATUS_MESSAGE = "ER_0001";
+
+	private static String ERROR_RATINGS_STATUS_MESSAGE = "ER_RATINGS_0001";
+	private static String ERROR_ORDER_STATUS_MESSAGE = "ER_ORDER_0001";
+	private static String ERROR_PRODUCT_STATUS_MESSAGE = "ER_PRODUCT_0001";
 	
 	/**
 	 * Method 'orderRequestRatingController' accepts json object as its param and returns a success or failure 
@@ -133,10 +137,23 @@ public class OrderRequestRatingController {
 
 						return ordRes;
 						
-					} else log.error(" [orderRequestRatingController] : Ratings corresponding to orderNo : ["  + orderNoFromJson +"] already exist");
-				} else log.error(" [orderRequestRatingController] : Order with orderNo : [" + orderNoFromJson + "] does not exist ");
-			} else log.error(" [orderRequestRatingController] : OrderRequest is empty ");
-		}
+					} else 
+					{
+						log.error(" [orderRequestRatingController] : Ratings corresponding to orderNo : ["  + orderNoFromJson +"] already exist");
+						ordRes.setStatusMessage(OrderRequestRatingController.ERROR_RATINGS_STATUS_MESSAGE);
+					}
+				} else 
+				{
+					log.error(" [orderRequestRatingController] : Order with orderNo : [" + orderNoFromJson + "] does not exist ");
+					ordRes.setStatusMessage(OrderRequestRatingController.ERROR_ORDER_STATUS_MESSAGE);
+				}
+			} else 
+			{
+				log.error(" [orderRequestRatingController] : OrderRequest is empty ");
+				ordRes.setStatusMessage(OrderRequestRatingController.ERROR_STATUS_MESSAGE);
+			}
+
+			}
 		catch(Exception e) {
 			
 			if(!failedRatings.isEmpty())
@@ -148,7 +165,6 @@ public class OrderRequestRatingController {
 		
 		ordRes.setStatus(OrderRequestRatingController.ERROR_STATUS);
 		ordRes.setStatusCode(OrderRequestRatingController.ERROR_STATUS_CODE);
-		ordRes.setStatusMessage(OrderRequestRatingController.ERROR_STATUS_MESSAGE);		
 		
 		return ordRes;
 	}
