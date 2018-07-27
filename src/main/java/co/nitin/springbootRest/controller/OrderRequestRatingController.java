@@ -73,7 +73,7 @@ public class OrderRequestRatingController {
 
 	private static String ERROR_RATINGS_STATUS_MESSAGE = "ER_RATINGS_0001";
 	private static String ERROR_ORDER_STATUS_MESSAGE = "ER_ORDER_0001";
-	private static String ERROR_PRODUCT_STATUS_MESSAGE = "ER_PRODUCT_0001";
+	private static String ERROR_REQUEST_EXIST_STATUS_MESSAGE = "ER_REQUEST_EXIST_0001";
 	
 	/**
 	 * Method 'orderRequestRatingController' accepts json object as its param and returns a success or failure 
@@ -97,14 +97,15 @@ public class OrderRequestRatingController {
 		
 		Set<OrderRatings> failedRatings = new HashSet<OrderRatings>();//add those ratings here for which object does not exist
 		OrderResponse ordRes = new OrderResponse();
+		String orderNoFromJson = ordReq.getOrderNo();
 		
 		try {
-			if(ordReq != null) {
-				
-				String orderNoFromJson = ordReq.getOrderNo();
+			if(ordReq != null && this.orderRequestService.hasOrderByOrderId(orderNoFromJson) != true) {
+				// If Request is already saved : no need to persis anything TODO CHANGE HERE IF ERROR, make sure same database query is maSde only once
 	
 				if(	this.ordersSevice.getOrdersById(orderNoFromJson) != null ) {//Check if an Order with that orderNo exists
-					if(	!this.orderRatingsService.hasOrderRatingsByOrdersNo( orderNoFromJson )) {//If rating of that orderNo does not exist
+					
+					if(	!this.orderRatingsService.hasOrderRatingsByOrdersNo(orderNoFromJson)) {//If rating of that orderNo does not exist
 
 						this.orderRequestService.saveOrderRequest(ordReq);
 						
@@ -149,8 +150,11 @@ public class OrderRequestRatingController {
 				}
 			} else 
 			{
-				log.error(" [orderRequestRatingController] : OrderRequest is empty ");
-				ordRes.setStatusMessage(OrderRequestRatingController.ERROR_STATUS_MESSAGE);
+				log.error(" [orderRequestRatingController] : OrderRequest is empty or request already been made ");
+				String msg = ( ordReq!=null ) 
+								? OrderRequestRatingController.ERROR_REQUEST_EXIST_STATUS_MESSAGE
+								: OrderRequestRatingController.ERROR_STATUS_MESSAGE;
+				ordRes.setStatusMessage(msg);
 			}
 
 			}

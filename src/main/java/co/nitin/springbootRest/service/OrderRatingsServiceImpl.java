@@ -51,10 +51,8 @@ public class OrderRatingsServiceImpl implements OrderRatingsService{
 	 */
 	@Override
 	public boolean hasOrderRatingsByOrdersNo(String orderNo) {
-		
 		//OR use Pageable : https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/AbstractPageRequest.html
-		boolean result = ( this.orderRatingsDAO.findOrderRatingsByOrdersNo(orderNo) > 0 )?true:false;
-		return result;
+		return (this.orderRatingsDAO.findOrderRatingsByOrdersNo(orderNo) > 0)?true:false;
 	}
 
 	/**

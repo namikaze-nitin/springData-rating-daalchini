@@ -39,4 +39,10 @@ public class OrderRequestServiceImpl implements OrderRequestService{
 	public void saveOrderRequest(OrderRequest request) {
 		this.orderReqDao.save(request);
 	}
+
+	@Override
+	public boolean hasOrderByOrderId(String id) {
+		return (this.orderReqDao.findOne(id) != null)?true:false;
+	}
+	
 }

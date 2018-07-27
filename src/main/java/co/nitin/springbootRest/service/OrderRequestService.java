@@ -14,4 +14,5 @@ import co.nitin.springbootRest.model.OrderRequest;
 public interface OrderRequestService {
 
 	public void saveOrderRequest(OrderRequest request);
+	public boolean hasOrderByOrderId(String id);
 }

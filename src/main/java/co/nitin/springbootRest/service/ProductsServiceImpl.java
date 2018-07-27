@@ -23,7 +23,6 @@ public class ProductsServiceImpl implements ProductsService{
 	 */
 	@Autowired
 	public ProductsServiceImpl(ProductsDAO productsDao) {
-		
 		this.productsDao = productsDao;
 	}
 
@@ -35,9 +34,6 @@ public class ProductsServiceImpl implements ProductsService{
 	 */
 	@Override
 	public boolean hasProductByProductId(String prodId) {
-		
-		Products prod = this.productsDao.findOne(prodId);
-		boolean hasValue = (prod != null)?true:false;
-		return hasValue;
+		return (this.productsDao.findOne(prodId) != null)?true:false;
 	}
 }
