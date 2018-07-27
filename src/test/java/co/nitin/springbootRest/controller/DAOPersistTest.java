@@ -1,5 +1,8 @@
 package co.nitin.springbootRest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +49,7 @@ public class DAOPersistTest {
 	}
 	
 	@Test
-	public void testOrderPersisting() {
+	public void testOrderRatingsPersisting() {
 
 		OrderRequest ordReq = new OrderRequest();
 		ordReq.setOrderNo("12345");
@@ -61,6 +64,46 @@ public class DAOPersistTest {
 		
 		orderRatingsdao.save(ordRat1);
 	}
+	
+	@Test
+	public void testRequestAndRatingsPersist() {
 
+		List <OrderRatings>list = new ArrayList<>();
+		
+		Products prod = new Products();
+		prod.setVariant_id("aaaa");
+		prod.setVariant_name("Aaloo Chips");
+		productdao.save(prod);
 
+		OrderRequest ordReq = new OrderRequest();
+		ordReq.setApiName("giveitemrating");
+		ordReq.setApiVersion(1.0);
+		ordReq.setOrderNo("737521F547D00D26");
+		ordReq.setRateOverAllExperience(4);
+		orderRequestdao.save(ordReq);
+		
+		OrderRatings ordRat1 = new OrderRatings();
+		ordRat1.setRating_food((byte) 1);
+		ordRat1.setVariant_id("aaaa");
+		list.add(ordRat1);
+
+		OrderRatings ordRat2 = new OrderRatings();
+		ordRat2.setRating_food((byte) 1);
+		ordRat2.setVariant_id("bbbb");
+		list.add(ordRat2);
+		
+		OrderRatings ordRat3 = new OrderRatings();
+		ordRat3.setRating_food((byte) 0);
+		ordRat3.setVariant_id("cccc");
+		list.add(ordRat3);
+		
+		ordRat1.setRequest(ordReq);
+		ordRat2.setRequest(ordReq);
+		ordRat3.setRequest(ordReq);
+
+		orderRatingsdao.save(list);
+
+		Assert.assertNotNull( productdao.findOne(prod.getVariant_id()) );
+		Assert.assertEquals( orderRatingsdao.findOne("aaaa").getRating_food() , 1);
+	}
 }
