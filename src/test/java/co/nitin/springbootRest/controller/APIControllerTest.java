@@ -23,14 +23,10 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.nitin.springbootRest.dao.OrderRatingsDAO;
-import co.nitin.springbootRest.dao.OrderRequestDAO;
-import co.nitin.springbootRest.dao.OrdersDAO;
 import co.nitin.springbootRest.dao.ProductsDAO;
 import co.nitin.springbootRest.model.OrderRatings;
 import co.nitin.springbootRest.model.OrderRequest;
 import co.nitin.springbootRest.model.OrderResponse;
-import co.nitin.springbootRest.model.Orders;
 import co.nitin.springbootRest.model.Products;
 
 
@@ -41,11 +37,7 @@ public class APIControllerTest {
 
 	private Logger log = LoggerFactory.getLogger(APIControllerTest.class);
 	
-	@Autowired private OrderRequestRatingController ordController;
 	@Autowired private ProductsDAO productdao;
-	@Autowired private OrderRatingsDAO orderRatingsdao;
-	@Autowired private OrderRequestDAO orderRequestdao;
-	@Autowired private OrdersDAO ordersDao;
 	@Autowired private MockMvc mockMvc;
 	@Autowired ObjectMapper mapper;
 	

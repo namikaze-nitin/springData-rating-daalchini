@@ -38,7 +38,6 @@ public class RequestExistControllerTest {
 
 	private Logger log = LoggerFactory.getLogger(RequestExistControllerTest.class);
 	
-	@Autowired private OrderRequestRatingController ordController;
 	@Autowired private ProductsDAO productdao;
 	@Autowired private OrderRatingsDAO orderRatingsdao;
 	@Autowired private OrderRequestDAO orderRequestdao;

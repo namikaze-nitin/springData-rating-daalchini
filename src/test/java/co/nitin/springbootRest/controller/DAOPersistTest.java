@@ -32,6 +32,7 @@ public class DAOPersistTest {
 	@Test
 	public void testProductPersisting() {
 		
+		log.info("[testProductPersisting]");
 		Assert.assertNotNull(productdao);
 
 		Products prod = new Products();
@@ -45,6 +46,7 @@ public class DAOPersistTest {
 	@Test
 	public void testOrderRatingsPersisting() {
 
+		log.info("[testOrderRatingsPersisting]");
 		OrderRequest ordReq = new OrderRequest();
 		ordReq.setOrderNo("12345");
 		orderRequestdao.save(ordReq);
@@ -62,6 +64,7 @@ public class DAOPersistTest {
 	@Test
 	public void testRequestAndRatingsPersist() {
 
+		log.info("[testRequestAndRatingsPersist]");
 		List <OrderRatings>list = new ArrayList<>();
 		
 		Products prod = new Products();

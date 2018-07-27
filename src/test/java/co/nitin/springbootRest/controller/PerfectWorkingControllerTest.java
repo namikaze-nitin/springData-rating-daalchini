@@ -21,8 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import co.nitin.springbootRest.dao.OrderRatingsDAO;
-import co.nitin.springbootRest.dao.OrderRequestDAO;
 import co.nitin.springbootRest.dao.OrdersDAO;
 import co.nitin.springbootRest.dao.ProductsDAO;
 import co.nitin.springbootRest.model.OrderRatings;
@@ -38,10 +36,7 @@ public class PerfectWorkingControllerTest {
 
 	private Logger log = LoggerFactory.getLogger(PerfectWorkingControllerTest.class);
 	
-	@Autowired private OrderRequestRatingController ordController;
 	@Autowired private ProductsDAO productdao;
-	@Autowired private OrderRatingsDAO orderRatingsdao;
-	@Autowired private OrderRequestDAO orderRequestdao;
 	@Autowired private OrdersDAO ordersDao;
 	@Autowired private MockMvc mockMvc;
 	@Autowired ObjectMapper mapper;
