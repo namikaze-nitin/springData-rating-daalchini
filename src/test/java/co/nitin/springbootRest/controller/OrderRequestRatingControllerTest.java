@@ -47,4 +47,12 @@ public class OrderRequestRatingControllerTest {
 		log.info("[controllerLoad]");
 		Assert.assertNotNull(this.ordController);
 	}
+	
+	@Test
+	public void testServerPort() {
+		
+		log.info("[testServerPort]");
+		Assert.assertEquals(port, 8080);
+	}
+	//TODO create another test using in built database class
 }
