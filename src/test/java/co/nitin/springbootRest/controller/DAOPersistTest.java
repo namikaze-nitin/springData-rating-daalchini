@@ -16,6 +16,8 @@ import co.nitin.springbootRest.dao.OrderRatingsDAO;
 import co.nitin.springbootRest.dao.OrderRequestDAO;
 import co.nitin.springbootRest.dao.OrdersDAO;
 import co.nitin.springbootRest.dao.ProductsDAO;
+import co.nitin.springbootRest.model.OrderRatings;
+import co.nitin.springbootRest.model.OrderRequest;
 import co.nitin.springbootRest.model.Products;
 
 @RunWith(SpringRunner.class)
@@ -31,7 +33,7 @@ public class DAOPersistTest {
 	@Autowired private OrdersDAO ordersDao;
 
 	@Test
-	public void testDatabaseController() {
+	public void testProductPersisting() {
 		
 		Assert.assertNotNull(productdao);
 
@@ -42,5 +44,23 @@ public class DAOPersistTest {
 		
 		Assert.assertNotNull( productdao.findOne(prod.getVariant_id()));
 	}
+	
+	@Test
+	public void testOrderPersisting() {
+
+		OrderRequest ordReq = new OrderRequest();
+		ordReq.setOrderNo("12345");
+		orderRequestdao.save(ordReq);
+		
+		OrderRatings ordRat1 = new OrderRatings();
+		ordRat1.setVariant_id("aaaa");
+		ordRat1.setRating_food((byte) 1);
+		ordRat1.setRequest(ordReq);
+		Assert.assertNotNull( orderRequestdao );
+		System.out.println(ordRat1.getVariant_id());
+		
+		orderRatingsdao.save(ordRat1);
+	}
+
 
 }
